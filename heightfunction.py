@@ -8,14 +8,14 @@ import time
 import random
 from scipy.sparse import csr_matrix
 
-def stabtoadj(x):
+def stabtoadj(x):                                #From stabilizer graph states to adjacency matrix of the graph
   ss=measurementssqgtableau.tabfromstring(len(x),x)
   n=np.shape(x)[0]
   adj=np.zeros((n,n),dtype=int)   
   for i in range(n):
         adj[i]=ss[i,n:2*n]
   return adj   
-def adjtostab(adj):
+def adjtostab(adj):                       #reverse process: from adjacency matrix to stabilizer operators of the graph
     n=np.shape(adj)[0]
     stab=[['+'] for i in range(n)]
     for i in range(n):
@@ -32,7 +32,7 @@ def adjtostab(adj):
     for i in range(len(stab)):
        stab[i]= (''.join(stab[i][j] for j in range(len(stab)+1)))
     return stab
-def randomstab(n):
+def randomstab(n):                             #Generate a random stabilizer state
     stab=[['+'] for i in range(n)]
     vv=['X','Z','Y','I']
     for j in range(n):
@@ -45,7 +45,7 @@ def randomstab(n):
 
 ra=(randomstab(10))
 
-def perm(N,tel,arx):
+def perm(N,tel,arx):                                 #Permute the ordering of stabilizer states
     return (csr_matrix(([1]*N, (tel, arx))).toarray())
 
 print(ra)
@@ -90,7 +90,7 @@ end=time.time()
 plt.imshow(ss)
 
 
-def tabluetostab(x):
+def tabluetostab(x):                                  
     n,m=np.shape(x)[0],np.shape(x)[1]
     stab=[[] for i in range(n)]
 
